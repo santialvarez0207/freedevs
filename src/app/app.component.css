@@ -1,0 +1,68 @@
+header{
+    background-color: #000106;
+    width: 100%;
+    min-height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.logo img {
+    width: 200px;
+}
+
+
+
+.btn-header{
+    background-color: #D0BD14;
+    border-radius: 40px;
+    padding: 8px 16px;
+    color: #000106;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    margin: 15px;
+    width: 150px;
+    
+}
+
+.box-btn{
+    width: 250px;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.nav-link {
+    font-size: 20px; /* Ajusta el tamaño del texto del navbar */
+    color: #fff; /* Color del texto por defecto */
+    margin: 15px; /* Centrar horizontalmente el texto */
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active {
+    color: orange; /* Color del texto al pasar el ratón, enfocar o hacer clic */
+}
+
+footer {
+
+    background-color: #000106;
+
+}
+
+.footer-social-icons .social-icon {
+    font-size: 34px;
+    margin-right: 30px;
+    color: #D0BD14;
+    
+  }
+  
+  .footer-social-icons .social-icon:hover {
+    color: #fff; /* Cambiar color al pasar el mouse para redes sociales como Twitter */
+  }

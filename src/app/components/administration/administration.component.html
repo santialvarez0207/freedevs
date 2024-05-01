@@ -1,0 +1,210 @@
+<div class="banner mt-5 pt-5">
+  <div class="title">Administración</div>
+</div>
+<div class="main p-5 mb-3 mt-4">
+  <div class="left-frame">
+    <!-- Usuarios--> 
+    <div class="banner mt-5">Usuarios</div>
+    
+    <div class="content">
+      <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#userModal"><span class="icon">+</span>
+        Añadir</a>
+      <div class="datatable mt-5">
+        <div class="row header">
+          <div class="col-4">Nombre</div>
+          <div class="col-4">Correo electrónico</div>
+          <div class="col-4">Acciones</div>
+        </div>
+        <div class="row" *ngFor="let user of users; let i = index;">
+          <div class="col-2">{{ user.name }}</div>
+          <div class="col-6">{{ user.email }}</div>
+          <div class="col-4">
+            <button class="btn btn-primary btn-sm me-2 mb-2 mt-2 btn-warning" (click)="openEditUserModal(user)">Editar</button>
+            <button class="btn btn-danger btn-sm  mb-2 mt-2 btn-dark" (click)="deleteUser(i)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Roles -->
+    <div class="banner mt-5">Roles</div>
+    <div class="content">
+
+      <div class="datatable mt-5">
+        <div class="row header">
+          <div class="col-6">Rol</div>
+          <div class="col-6">Privilegios</div>
+          
+        </div>
+        <div class="row" *ngFor="let rol of roles; let i = index;">
+          <div class="col-6">{{ rol.name }}</div>
+          <div class="col-6">{{ rol.descri }}</div>
+          
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="right-frame">
+    <!-- Servicios -->
+
+    <div class="banner mt-5">Servicios</div>
+    <div class="content">
+      <a href="#" class="link" data-bs-toggle="modal" data-bs-target="#serviceModal"><span class="icon">+</span>
+        Añadir</a>
+      <div class="datatable mt-5">
+        <div class="row header">
+          <div class="col-4">Nombre</div>
+          <div class="col-4">Descripción</div>
+          <div class="col-4">Acciones</div>
+        </div>
+        <div class="row" *ngFor="let service of services; let i = index;">
+          <div class="col-4">{{ service.name }}</div>
+          <div class="col-4">{{ service.description }}</div>
+          <div class="col-4">
+            <button class="btn btn-primary btn-sm me-2 mb-2 mt-2 btn-warning" (click)="openEditModal(service)">Editar</button>
+            <button class="btn btn-danger btn-sm  mb-2 mt-2 btn-dark" (click)="deleteService(i)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- Modales -->
+
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Añadir Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Marcado del modal de servicios -->
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serviceModalLabel">Agregar Servicio Web</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onSubmitService()" #serviceForm="ngForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="serviceName" class="form-label">Nombre del Servicio</label>
+            <input type="text" class="form-control" id="serviceName" name="serviceName" [(ngModel)]="service.name"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="serviceDescription" class="form-label">Descripción del Servicio</label>
+            <textarea class="form-control" id="serviceDescription" name="serviceDescription"
+              [(ngModel)]="service.description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="servicePrice" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="servicePrice" name="servicePrice" [(ngModel)]="service.price"
+              required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-warning" [disabled]="serviceForm.invalid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Edición de Servicio -->
+<div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editServiceModalLabel">Editar Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onEditService()" #editServiceForm="ngForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="editServiceName" class="form-label">Nombre del Servicio</label>
+            <input type="text" class="form-control" id="editServiceName" name="editServiceName"
+              [(ngModel)]="editedService.name" required>
+          </div>
+          <div class="mb-3">
+            <label for="editServiceDescription" class="form-label">Descripción del Servicio</label>
+            <textarea class="form-control" id="editServiceDescription" name="editServiceDescription"
+              [(ngModel)]="editedService.description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="editServicePrice" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="editServicePrice" name="editServicePrice"
+              [(ngModel)]="editedService.price" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-warning" [disabled]="editServiceForm.invalid">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Edición de Usuarios -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onEditUser()" #editUserForm="ngForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="editUserName" class="form-label">Nombre del Usuario</label>
+            <input type="text" class="form-control" id="editUserName" name="editUserName"
+              [(ngModel)]="editedUser.name" required>
+          </div>
+          <div class="mb-3">
+            <label for="editUserEmail" class="form-label">Detalle de contacto de usuario</label>
+            <input type="email" class="form-control" id="editUserEmail" name="editUserEmail"
+              [(ngModel)]="editedUser.email" required>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-warning" [disabled]="editUserForm.invalid">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
